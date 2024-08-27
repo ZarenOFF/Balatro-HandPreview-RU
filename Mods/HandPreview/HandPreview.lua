@@ -1,8 +1,8 @@
 --- STEAMODDED HEADER
---- MOD_NAME: Hand Preview
+--- MOD_NAME: Hand Preview RU
 --- MOD_ID: handpreview
---- MOD_AUTHOR: [Toeler]
---- MOD_DESCRIPTION: A utility mod to list the hands that you can make. v1.0.0
+--- MOD_AUTHOR: [Toeler (Перевод от ZarenOFF)]
+--- MOD_DESCRIPTION: Мод для отображения возможных комбинаций. v1.0.0
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
@@ -24,6 +24,22 @@ function SMODS.INIT.handpreview()
 		}
 	end
 	HandPreview.settings = G.SETTINGS.HandPreview
+
+	local hand_translations = {
+		["Flush Five"] = "Покер-флеш",
+		["Flush House"] = "Флеш-хаус",
+		["Five of a Kind"] = "Покер",
+		["Royal Flush"] = "Флеш-рояль",
+		["Straight Flush"] = "Стрит-флеш",
+		["Four of a Kind"] = "Каре",
+		["Full House"] = "Фулл-хаус",
+		["Flush"] = "Флеш",
+		["Straight"] = "Стрит",
+		["Three of a Kind"] = "Сет",
+		["Two Pair"] = "Две пары",
+		["Pair"] = "Пара",
+		["High Card"] = "Старшая карта"
+	}
 
 	local balalib_mod = SMODS.findModByID("balalib")
 	if not balalib_mod then
@@ -51,7 +67,7 @@ function SMODS.INIT.handpreview()
 		args.header = {
 			n = G.UIT.T,
 			config = {
-				text = 'Possible Hands',
+				text = 'Возможные комбинации',
 				scale = 0.3,
 				colour = G.C.WHITE
 			}
@@ -220,6 +236,59 @@ function SMODS.INIT.handpreview()
 		return unique_hands
 	end
 
+    local function translate_hand_type(hand_type)
+        return hand_translations[hand_type] or hand_type
+    end
+
+	local function translate_card_value(value)
+		local value_translations = {
+			["Ace"] = "Туз",
+			["Aces"] = "Тузы",
+			["King"] = "Король",
+			["Kings"] = "Короли",
+			["Queen"] = "Дама",
+			["Queens"] = "Дамы",
+			["Jack"] = "Валет",
+			["Jacks"] = "Валеты",
+			["10"] = "10",
+			["10s"] = "10-ки",
+			["9"] = "9",
+			["9s"] = "9-ки",
+			["8"] = "8",
+			["8s"] = "8-ки",
+			["7"] = "7",
+			["7s"] = "7-ки",
+			["6"] = "6",
+			["6s"] = "6-ки",
+			["5"] = "5",
+			["5s"] = "5ки",
+			["4"] = "4",
+			["4s"] = "4ки",
+			["3"] = "3",
+			["3s"] = "3-ки",
+			["2"] = "2",
+			["2s"] = "2-ки"
+		}
+		return value_translations[value] or value
+	end
+
+	local function translate_suit(suit)
+		local suit_translations = {
+			["Hearts"] = "Черви",
+			["Diamonds"] = "Бубны",
+			["Clubs"] = "Трефы",
+			["Spades"] = "Пики"
+		}
+		return suit_translations[suit] or suit
+	end
+
+	local function translate_description(description)
+		return description:gsub("(%w+)", function(word)
+			local tmpword = translate_card_value(word)
+			return translate_suit(tmpword)
+		end)
+	end
+
 	local function display_hands(unique_hands)
 		local order = { "Flush Five", "Flush House", "Five of a Kind", "Royal Flush", "Straight Flush",
 			"Four of a Kind", "Full House", "Flush", "Straight", "Three of a Kind",
@@ -246,7 +315,7 @@ function SMODS.INIT.handpreview()
 			elseif hand_type == "Pair" or hand_type == "Three of a Kind" or hand_type == "Four of a Kind" then
 				description = cards[1].base.value .. "s"
 			elseif hand_type == "Two Pair" then
-				description = cards[3].base.value .. "s & " .. cards[1].base.value .. "s"
+				description = cards[3].base.value .. "s и " .. cards[1].base.value .. "s"
 			elseif hand_type == "Straight" or hand_type == "Straight Flush" then
 				if cards[1].base.value == '2' and cards[#cards].base.value == 'Ace' then
 					description = cards[#cards].base.value .. "-" .. cards[#cards - 1].base.value
@@ -299,15 +368,21 @@ function SMODS.INIT.handpreview()
 
 		for _, hand_type in ipairs(order) do
 			if grouped_hands[hand_type] and next(grouped_hands[hand_type]) then
-				-- Sort descriptions in value order for multiple entries in the same hand type
+				-- Сортировка описаний по значению для нескольких вхождений одного типа руки
 				table.sort(grouped_hands[hand_type], function(a, b)
 					local a_high = a:match("^(.-)%s") or a
 					local b_high = b:match("^(.-)%s") or b
 					return a_high > b_high
 				end)
 
-				local descriptions = table.concat(grouped_hands[hand_type], ", ")
-				local handInfo = hand_type
+				-- Переводим каждое описание
+				local translated_descriptions = {}
+				for i, description in ipairs(grouped_hands[hand_type]) do
+					translated_descriptions[i] = translate_description(description)
+				end
+
+				local descriptions = table.concat(translated_descriptions, ", ")
+				local handInfo = translate_hand_type(hand_type)
 				if includeDescriptions then
 					handInfo = handInfo .. ": " .. descriptions
 				end
@@ -400,7 +475,7 @@ function SMODS.INIT.handpreview()
 						{
 							n = G.UIT.T,
 							config = {
-								text = "Hand Preview Settings",
+								text = "Настройки",
 								scale = 0.6,
 								colour = G.C.UI.TEXT_LIGHT
 							}
@@ -415,7 +490,7 @@ function SMODS.INIT.handpreview()
 					nodes = {
 						create_option_cycle({
 							id = "hand_preview_preview_count",
-							label = "Preview Count",
+							label = "Количество комбинаций",
 							scale = 0.8,
 							w = 1.2,
 							options = { 0, 1, 2, 3, 4, 5 },
@@ -440,7 +515,7 @@ function SMODS.INIT.handpreview()
 					nodes = {
 						create_toggle({
 							id = "hand_preview_include_breakdown_toggle",
-							label = "Include Face-Down Cards",
+							label = "Включая лицом вниз",
 							ref_table = G.SETTINGS.HandPreview,
 							ref_value = "include_facedown"
 						})
@@ -454,7 +529,7 @@ function SMODS.INIT.handpreview()
 					nodes = {
 						create_toggle({
 							id = "hand_preview_include_breakdown_toggle",
-							label = "Include Hand Breakdown",
+							label = "Отображать комбинации",
 							ref_table = G.SETTINGS.HandPreview,
 							ref_value = "include_breakdown"
 						})
@@ -466,7 +541,7 @@ function SMODS.INIT.handpreview()
 						align = 'cm'
 					},
 					nodes = {
-						UIBox_button { label = { "Reset window position" }, button = "hand_preview_reset_position", minw = 1.7, minh = 0.4, scale = 0.35 }
+						UIBox_button { label = { "Сбросить позицию" }, button = "hand_preview_reset_position", minw = 1.7, minh = 0.4, scale = 0.35 }
 					}
 				},
 			} }),
@@ -523,7 +598,7 @@ function SMODS.INIT.handpreview()
 													{
 														n = G.UIT.T,
 														config = {
-															text = 'Hand Preview Settings',
+															text = 'Настройки',
 															scale = 0.3,
 															colour = G.C.UI.TEXT_LIGHT
 														}
@@ -549,7 +624,7 @@ function SMODS.INIT.handpreview()
 																	{
 																		n = G.UIT.T,
 																		config = {
-																			text = 'Preview Count: ' ..
+																			text = 'Количество комбинаций: ' ..
 																				tostring(get_setting('preview_count')),
 																			scale = 0.15,
 																			colour = G.C.UI.TEXT_LIGHT
@@ -563,7 +638,7 @@ function SMODS.INIT.handpreview()
 																	{
 																		n = G.UIT.T,
 																		config = {
-																			text = 'Include Face-Down: ' ..
+																			text = 'Включая лицом вниз: ' ..
 																				(get_setting('include_facedown') and 'Yes' or 'No'),
 																			scale = 0.15,
 																			colour = G.C.UI.TEXT_LIGHT
@@ -589,7 +664,7 @@ function SMODS.INIT.handpreview()
 																	{
 																		n = G.UIT.T,
 																		config = {
-																			text = 'Include Breakdown: ' ..
+																			text = 'Отображать названия карт: ' ..
 																				(get_setting('include_breakdown') and 'Yes' or 'No'),
 																			scale = 0.15,
 																			colour = G.C.UI.TEXT_LIGHT

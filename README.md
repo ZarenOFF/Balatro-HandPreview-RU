@@ -1,76 +1,65 @@
-# Balatro Hand Preview
-
-<div align="center">
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Toeler/Balatro-HandPreview)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Toeler/Balatro-HandPreview/total)
-![GitHub license](https://img.shields.io/github/license/Toeler/Balatro-HandPreview)
-![GitHub issues](https://img.shields.io/github/issues/Toeler/Balatro-HandPreview)
-
-</div>
+# Balatro Hand Preview RU
 
 <p align="center">
-  <img src="https://i.imgur.com/9xWUIDX.png" alt="Balatro Hand Preview Logo">
+  <img src="https://i.imgur.com/oUK10Qq.png" alt="Логотип Balatro Hand Preview">
 </p>
 
-## 📜 Description
+## 📜 Описание
 
-Hand Preview is a mod for Balatro that adds a window showing the possible poker hands that you can make with your current hand!
+Hand Preview — это мод для Balatro, добавляющий окно, показывающее возможные покерные комбинации, которые можно собрать с вашими текущими картами!
 
-## ✨ Features
+## ✨ Особенности
 
 <p align="center">
-  <img src="https://i.imgur.com/8dkkvna.png" alt="Hand Preview Window" width="400">
+  <img src="https://i.imgur.com/TccbR1h.png" alt="Окно Hand Preview" width="400">
 </p>
 
-- Displays a window with possible poker hands you can create with your current cards.
+- Отображает окно с возможными покерными комбинациями, которые можно создать с вашими текущими картами.
 
 <p align="center">
-  <img src="https://i.imgur.com/lW3Ooai.gif" alt="Moving the Hand Preview Window" width="400">
+  <img src="https://i.imgur.com/lW3Ooai.gif" alt="Перемещение окна Hand Preview" width="400">
 </p>
 
-- Move the window wherever you want!
-- Change the anchor point to keep it from overlapping other things on the screen.
+- Перемещайте окно куда угодно!
+- Меняйте точку закрепления, чтобы оно не перекрывало другие элементы на экране.
 
 <p align="center">
-  <img src="https://i.imgur.com/LYQ8nNn.png" alt="Settings Window" width="400">
+  <img src="https://i.imgur.com/nsQiz5t.png" alt="Окно настроек" width="400">
 </p>
 
-- Change the number of hands shown.
-- Include or exclude face-down cards in the possible hand calculation (default: Exclude).
-- Include or exclude a list of the cards that will make up a possible hand (default: Include).
+- Изменяйте количество отображаемых комбинаций.
+- Включайте или исключайте карты лицом вниз при расчете возможных комбинаций (по умолчанию: Выключено).
+- Включайте или исключайте достоинства и масти карт, которые составляют возможную комбинацию (по умолчанию: Включено).
 
-## 📦 Installation Instructions
+## 📦 Инструкции по установке
 
-### Prerequisites
+### Требования
 
-- Ensure you have [Steamodded](https://github.com/Steamopollys/Steamodded) installed for managing Balatro mods.
+- Убедитесь, что у вас установлен [Steamodded](https://github.com/Steamopollys/Steamodded) для управления модами Balatro.
 
-### Steps
+### Шаги
 
-1. **Download the Mod**:
+1. **Скачайте мод**:
 
-   - Go to the [releases page](https://github.com/Toeler/Balatro-HandPreview/releases) and download the latest version of Balatro Hand Preview.
+    - Перейдите на [страницу релизов](https://github.com/ZarenOFF/Balatro-HandPreview-RU/releases) и скачайте последнюю версию Balatro Hand Preview.
 
-2. **Install the Mod**:
+2. **Установите мод**:
 
-   - Copy the downloaded `Mods` folder to your Balatro data folder:
-     - **Windows**: `C:\Users\<USER>\AppData\Roaming\Balatro\Mods` (or `%appdata%\Balatro\Mods`)
-     - **Mac/Linux**: `/home/$USER/.local/share/Steam/steamapps/compatdata/2379780/pfx/drive_c/users/steamuser/AppData/Roaming/Balatro/Mods`
+    - Скопируйте загруженную папку `Mods` в папку данных Balatro:
+        - **Windows**: `C:\Users\<USER>\AppData\Roaming\Balatro\Mods` (или `%appdata%\Balatro\Mods`)
+        - **Mac/Linux**: `/home/$USER/.local/share/Steam/steamapps/compatdata/2379780/pfx/drive_c/users/steamuser/AppData/Roaming/Balatro/Mods`
 
-3. **Restart Balatro**:
-   - Restart the game to apply the changes.
+3. **Перезапустите Balatro**:
+    - Перезапустите игру для применения изменений.
 
-## 📄 License
+## 📄 Лицензия
 
-This project is licensed under the GPL-3.0 License. See the [LICENSE](https://github.com/Toeler/Balatro-HandPreview/blob/main/LICENSE) file for details.
+Этот проект лицензирован на условиях лицензии GPL-3.0. Подробнее см. в файле [LICENSE](https://github.com/ZarenOFF/Balatro-HandPreview-RU/blob/main/LICENSE).
 
-## 📬 Contact
+## 📬 Контакты
 
-For any issues or suggestions, please open an issue on GitHub.
+Для любых вопросов или предложений откройте issue на GitHub.
 
-## 🤝 Contributing
+## 🤝 Вклад
 
-We welcome contributions! If you would like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
-
----
+Мы приветствуем ваш вклад! Если вы хотите внести свой вклад, пожалуйста, форкните репозиторий и используйте feature-ветку. Пул-реквесты warmly welcome.
