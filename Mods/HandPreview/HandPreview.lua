@@ -2,7 +2,7 @@
 --- MOD_NAME: Hand Preview RU
 --- MOD_ID: handpreview
 --- MOD_AUTHOR: [Toeler (Перевод от ZarenOFF)]
---- MOD_DESCRIPTION: Мод для отображения возможных комбинаций. v1.0.0
+--- MOD_DESCRIPTION: Мод для отображения возможных комбинаций. v1.0.0a
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
@@ -338,7 +338,7 @@ function SMODS.INIT.handpreview()
 						second = rank
 					end
 				end
-				description = first .. "s over " .. second .. "s"
+				description = first .. "s и " .. second .. "s"
 			end
 
 			if description then
